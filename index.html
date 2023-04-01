@@ -18,7 +18,7 @@
 	const body = {
 		"transaction": [
 		{
-		"query": "SELECT * FROM TEST_TABLE ORDER BY ID ASC"
+		"query": "SELECT * FROM TEST_TABLE"
 		},
 		]
 	};
@@ -29,7 +29,7 @@
 			var json = JSON.parse(xhr.responseText);
 			// и вот здесь формировать HTML ответа
 			d = document.getElementById("response");
-			d.innerHTML = xhr.responseText;
+			//d.innerHTML = xhr.responseText;
 			let s = "";
 			let resultSet = json["results"][0]["resultSet"]
 			for (pair of resultSet) {
@@ -41,15 +41,18 @@
 	}
 
 	// Делаем запрос
+
 	var xhr = new XMLHttpRequest();
-	var url = "http://176.124.209.11:12321/testDb";
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-Type", "application/json");
-	// Указываем функцию, которая будет вызвана, когда будет получен ответ
-	xhr.onreadystatechange = printResponse;
+	var url = "http://localhost:12321/testDB";
 
-	xhr.send(JSON.stringify(body));
+	function getData(){
 
+		xhr.open("POST", url, true);
+		xhr.setRequestHeader("Content-Type", "application/json");
+		// Указываем функцию, которая будет вызвана, когда будет получен ответ
+		xhr.onreadystatechange = printResponse;
+		xhr.send(JSON.stringify(body));
+	}
 	</script>
 	</body>
 <html>
