@@ -10,12 +10,19 @@
 	        <p>А вот это самый обычный, нудный, не раскрашенный CSS-ом абзац.</p>
 
 	<input type="button" id="get_data" value="Get data from DB!" onclick="getData()">
+	<input type="button" id="insert_data" value="Insert data to DB!" onclick="insertData()">
 
-	<div id="response"></div>
-	<div id="values"></div>
+	<p>
+	<input type="text" id="id_ins">
+	<input type="text" id="val_ins">
+	</p>
+
+	<table id="values" border="2px"></table>
+	
+
 	<script>
 		// Формируем JSON с SQL-командой
-	const body = {
+	const getDataRequets = {
 		"transaction": [
 		{
 		"query": "SELECT * FROM TEST_TABLE"
@@ -28,12 +35,12 @@
 		if (xhr.readyState === 4 && xhr.status === 200) {
 			var json = JSON.parse(xhr.responseText);
 			// и вот здесь формировать HTML ответа
-			d = document.getElementById("response");
+			//d = document.getElementById("response");
 			//d.innerHTML = xhr.responseText;
 			let s = "";
 			let resultSet = json["results"][0]["resultSet"]
 			for (pair of resultSet) {
-				s += pair["VAL"] + "\n<br/>"
+				s += "<tr> <th>" +pair["ID"] + "</th> <th>" +  pair["VAL"] + "</th> </tr> \n"
 			}
 			d2 = document.getElementById("values");
 			d2.innerHTML = s;
@@ -44,14 +51,41 @@
 
 	var xhr = new XMLHttpRequest();
 	var url = "http://localhost:12321/testDB";
+	
+
 
 	function getData(){
-
+                    
 		xhr.open("POST", url, true);
 		xhr.setRequestHeader("Content-Type", "application/json");
 		// Указываем функцию, которая будет вызвана, когда будет получен ответ
 		xhr.onreadystatechange = printResponse;
-		xhr.send(JSON.stringify(body));
+		xhr.send(JSON.stringify(getDataRequets));
+	}
+
+	function insertData(){
+		var in_val = document.getElementById("val_ins").value;
+		var in_id = document.getElementById("id_ins").value;
+
+		InsRequest = `INSERT INTO TEST_TABLE VALUES (${in_id}, ${in_val});`;
+
+		const InsBody = {
+			"transaction": [
+				{
+					"statement": InsRequest
+				}
+			]
+		}
+
+		//alert(InsRequest);
+
+
+		xhr.open("POST", url, true);
+                xhr.setRequestHeader("Content-Type", "application/json");
+
+                xhr.send(JSON.stringify(InsBody));
+
+		
 	}
 	</script>
 	</body>
