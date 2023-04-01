@@ -1,17 +1,21 @@
 <DOCTYPE html>
 	<head>
 		 <link rel="stylesheet" href="styles.css">
-	        <h>Виды снега </h>
+	        <h1>Виды снега </h1>
 	</head>
 
 	<body>
-	        <p class="citation">Когда вы имеете дело с проблемой или трудностью, старайтесь сделать эту затею <strong>интересной</strong>. Тогда вы сможете сосредоточиться на интересной стороне дела и не обращать внимания на тяжелую работу, которую предстоит проделать. Например, можно не только писать текст, но и раскрашивать его по-всякому. </p>
+	        <p class="citation"> Изучая природное метеорологическое явление, ученые классифицировали твердые атмосферные осадки по механизму выпадения, форме, интенсивности, длительности и даже цвету. В зависимости от того, сколько времени идет <strong>снег </strong>, определяется длительность <strong>снегопада </strong>. Иногда осадки длятся несколько дней и засыпают целые города.  </p>
 
-	        <p>А вот это самый обычный, нудный, не раскрашенный CSS-ом абзац.</p>
 
 	<input type="button" id="get_data" value="Get data from DB!" onclick="getData()">
 	<input type="button" id="insert_data" value="Insert data to DB!" onclick="insertData()">
 
+	<p>
+
+	<label for="id_ins"> Id (int) </label>
+	<label for="val_ins"> Value (str in quotes) </label>
+	</p>	
 	<p>
 	<input type="text" id="id_ins">
 	<input type="text" id="val_ins">
@@ -19,7 +23,6 @@
 
 	<table id="values" border="2px"></table>
 	
-
 	<script>
 		// Формируем JSON с SQL-командой
 	const getDataRequets = {
