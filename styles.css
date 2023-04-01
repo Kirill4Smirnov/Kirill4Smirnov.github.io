@@ -1,0 +1,10 @@
+.citation {
+	width:500px;
+        background-color:#FFFF66;
+        font-family: Arial monospace;
+        border-left:4px dotted blue;
+}
+strong {
+	font-weight: bold;
+}
+
